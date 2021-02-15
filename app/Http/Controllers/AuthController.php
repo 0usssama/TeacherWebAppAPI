@@ -22,18 +22,23 @@ class AuthController extends Controller
                 return response([
                     'message' => 'success',
                     'user' => $user,
-                    'token' => $token
+                    'token' => $token,
                 ]);
             }
 
-            return response([
-                'message' => 'Invalid Username/password',
-            ], 401);
+            return response(
+                [
+                    'message' => 'Invalid credentials',
+                ],
+                401
+            );
         } catch (Exception $exception) {
-
-            return response([
-                'message' => $exception->getMessage()
-            ], 400);
+            return response(
+                [
+                    'message' => $exception->getMessage(),
+                ],
+                400
+            );
         }
     }
     public function user()
@@ -44,16 +49,19 @@ class AuthController extends Controller
     {
         try {
             $user = User::create([
-                'first_name' => $request->input('first_name'), 'last_name' => $request->input('last_name'), 'email' => $request->input('email'),
-                'password' => Hash::make($request->input('passwird'))
-
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('passwird')),
             ]);
             return $user;
         } catch (Exception $exception) {
-            return response([
-                'message' => $exception->getMessage()
-
-            ], 400);
+            return response(
+                [
+                    'message' => $exception->getMessage(),
+                ],
+                400
+            );
         }
     }
 }

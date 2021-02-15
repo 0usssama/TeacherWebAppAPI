@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'password_confirm' => 'required|same:password'
+            'password_confirm' => 'required|same:password',
         ];
     }
 }
